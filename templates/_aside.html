@@ -1,0 +1,40 @@
+<div class="w-full lg:w-80 self-start p-6 flex-shrink-0 bg-gray-100 rounded-lg shadow-md">
+    <!-- Search -->
+    <form action="" class="w-full flex items-center justify-between rounded-md overflow-hidden shadow-md">
+        <input type="text" name='q' placeholder="Search..." class="w-full h-10 px-3 outline-none">
+        <button type="submit" class="w-10 h-10 flex-shrink-0 bg-green-500 hover:bg-green-600">
+            <i class="fas fa-search text-white"></i>
+        </button>
+    </form>
+
+    <!-- Populars -->
+    <div class="flex flex-col gap-2">
+        <h2 class="text-lg font-semibold border-b-2 py-4 pb-2">Tags</h2>
+        <div class="flex flex-wrap gap-1 text-xs">
+            {% for tag in tags %}
+                <a href="#" class="py-1 px-3 bg-blue-200 rounded-md font-bold hover:bg-blue-300">{{ tag }}</a>
+            {% endfor %}
+        </div>
+        {% if related %}
+        <h2 class="text-lg font-semibold border-b-2 py-4 pb-2">Related</h2>
+        <div class="text-sm text-gray-500 flex flex-col gap-3">
+            {% for post in related %}
+            <div>
+                <a href="#" class="font-semibold text-gray-800 hover:underline mr-2">Lorem: </a>
+                <a href="#" class="hover:underline text-gray-700">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste cum eius voluptas quidem</a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <h2 class="text-lg font-semibold border-b-2 py-4 pb-2">Popular</h2>
+        <div class="text-sm text-gray-500 flex flex-col gap-3">
+            {% for post in popular %}
+                <div>
+                    <a href="{{ post.category.get_absolute_url }}" class="font-semibold text-gray-800 hover:underline mr-2">{{ post.category }}: </a>
+                    <a href="{{ post.get_absolute_url }}" class="hover:underline text-gray-700">{{ post.description }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

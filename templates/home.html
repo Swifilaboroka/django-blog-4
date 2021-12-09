@@ -1,0 +1,71 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block content %}
+<div
+  class="container mx-auto px-4 sm:px-0 mt-10 flex flex-col lg:flex-row gap-10"
+>
+  <div class="w-full flex flex-col items-center gap-5">
+    <!-- 	Card -->
+    {% for post in posts %}
+        <div
+        class="
+          w-full
+          md:h-48
+          flex flex-col
+          md:flex-row
+          bg-gray-100
+          rounded-md
+          overflow-hidden
+          shadow-md
+        "
+      >
+        <a href="{{ post.get_absolute_url }}">
+          <div class="flex-shrink-0 w-full h-auto md:w-80 md:h-full">
+            <img
+              class="w-full h-full object-cover"
+              src="{{ post.thumbnail.url }}"
+              alt="..."
+            />
+          </div>
+        </a>
+        <div class="flex flex-col py-5 gap-2 w-full h-full p-5">
+          <div class="flex items-center gap-2">
+            <a
+              href="{{ post.category.get_absolute_url }}"
+              class="font-semibold text-blue-600 text-sm hover:underline"
+              >{{ post.category }}</a
+            >
+          </div>
+          <a href="{{ post.get_absolute_url }}" class="font-medium text-xl hover:text-gray-500"
+            >{{ post.title }}</a
+          >
+          <p class="text-gray-500 text-sm">
+            {{ post.description|truncatechars:190 }}
+          </p>
+        </div>
+      </div>
+    {% endfor %}
+    
+    
+
+    <!-- Pagination -->
+    {% if posts.has_other_pages %}
+      <div class="w-full mt-8 flex items-center justify-between text-white">
+        {% if posts.has_previous %}
+          <a href="?page={{ posts.previous_page_number }}" class="px-4 py-2 font-bold rounded-xs bg-gray-400 hover:bg-blue-500 transition">Previous list</a>
+        {% else %}
+          <a href="#" class="px-4 py-2 font-bold rounded-xs bg-gray-400 transition">Previous list</a>
+        {% endif %}
+        {% if posts.has_next %}
+          <a href="?page={{ posts.next_page_number }}" class="px-4 py-2 font-bold rounded-xs bg-gray-400 hover:bg-blue-500 transition">Next list</a>
+        {% else %}
+          <a href="#" class="px-4 py-2 font-bold rounded-xs bg-gray-400 transition">Next list</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+
+  {% include '_aside.html' %}
+  </div>
+</div>  
+{% endblock content %}
