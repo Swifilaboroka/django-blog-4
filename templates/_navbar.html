@@ -73,43 +73,12 @@
           font-bold
         "
       >
-        <a href="#" class="hover:text-white transition duration-200"
-          >Python chat</a
-        >
-        <a href="#" class="hover:text-white transition duration-200"
-          >Python Tips</a
-        >
-        <a href="#" class="hover:text-white transition duration-200">Django</a>
-        <a href="#" class="hover:text-white transition duration-200">Quizzes</a>
-        <a href="#" class="hover:text-white transition duration-200">Top</a>
-        <a href="#" class="hover:text-white transition duration-200">ML</a>
+        {% for cat in categories %}
+          <a href="{% url 'by_category' cat.slug %}" class="hover:text-white transition duration-200">{{ cat }}</a>
+        {% endfor %}
       </div>
 
-      <div
-        class="
-          flex flex-col
-          md:flex-row
-          items-start
-          md:items-center
-          gap-4
-          mt-12
-          md:mt-0
-        "
-      >
-        <a href="#" class="text-base text-gray-200 font-bold">Login</a>
-        <a
-          href="#"
-          class="
-            font-bold
-            text-gray-200
-            md:text-gray-700 md:py-2 md:px-5
-            rounded-md
-            bg-transparent
-            md:bg-gray-100 md:text-gray-800
-          "
-          >Sign up</a
-        >
-      </div>
+      
     </div>
   </div>
 </nav>

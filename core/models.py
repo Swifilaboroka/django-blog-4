@@ -8,7 +8,14 @@ import uuid
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=12)
+    name = models.CharField(max_length=12, unique=True)
+    slug = models.SlugField(blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
 
     def __str__(self):
         return self.name
@@ -43,11 +50,15 @@ class Post(models.Model):
         ordering = ('-timestamp',)
 
 class Category(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(unique=True, max_length=20)
+    slug = models.SlugField(blank=True, null=True)
+    for_navbar = models.BooleanField(default=False)
 
-    def get_absolute_url(self):
-        return reverse("post_list", kwargs={"pk": self.pk})
-    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        self.name = self.name.lower()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name

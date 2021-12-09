@@ -6,45 +6,50 @@
 >
   <div class="w-full flex flex-col items-center gap-5">
     <!-- 	Card -->
-    {% for post in posts %}
+    {% if posts %}
+      {% for post in posts %}
         <div
-        class="
-          w-full
-          md:h-48
-          flex flex-col
-          md:flex-row
-          bg-gray-100
-          rounded-md
-          overflow-hidden
-          shadow-md
-        "
-      >
-        <a href="{{ post.get_absolute_url }}">
-          <div class="flex-shrink-0 w-full h-auto md:w-80 md:h-full">
-            <img
-              class="w-full h-full object-cover"
-              src="{{ post.thumbnail.url }}"
-              alt="..."
-            />
-          </div>
-        </a>
-        <div class="flex flex-col py-5 gap-2 w-full h-full p-5">
-          <div class="flex items-center gap-2">
-            <a
-              href="{{ post.category.get_absolute_url }}"
-              class="font-semibold text-blue-600 text-sm hover:underline"
-              >{{ post.category }}</a
+          class="
+            w-full
+            md:h-48
+            flex flex-col
+            md:flex-row
+            bg-gray-100
+            rounded-md
+            overflow-hidden
+            shadow-md
+          "
+        >
+          <a href="{{ post.get_absolute_url }}">
+            <div class="flex-shrink-0 w-full h-auto md:w-80 md:h-full">
+              <img
+                class="w-full h-full object-cover"
+                src="{{ post.thumbnail.url }}"
+                alt="..."
+              />
+            </div>
+          </a>
+          <div class="flex flex-col py-5 gap-2 w-full h-full p-5">
+            <div class="flex items-center gap-2">
+              <a
+                href="{% url 'by_category' post.category.slug %}"
+                class="font-semibold text-blue-600 text-sm hover:underline"
+                >{{ post.category }}</a
+              >
+            </div>
+            <a href="{{ post.get_absolute_url }}" class="font-medium text-xl hover:text-gray-500"
+              >{{ post.title }}</a
             >
+            <p class="text-gray-500 text-sm">
+              {{ post.description|truncatechars:190 }}
+            </p>
           </div>
-          <a href="{{ post.get_absolute_url }}" class="font-medium text-xl hover:text-gray-500"
-            >{{ post.title }}</a
-          >
-          <p class="text-gray-500 text-sm">
-            {{ post.description|truncatechars:190 }}
-          </p>
         </div>
-      </div>
     {% endfor %}
+    {% else %}
+      <p class="font-bold text-3xl ">Oops!</p>
+      <p class="font-bold text-3xl ">No matches found</p>
+    {% endif %}
     
     
 
