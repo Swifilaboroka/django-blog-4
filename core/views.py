@@ -96,9 +96,6 @@ def article_page(request, slug):
     post = get_object_or_404(Post, slug=slug)
     tags = Tag.objects.annotate(t_count=Count('post')).order_by('-t_count')[:8]
     popular = Post.objects.order_by('-view_count')[:4]
-    related = Post.objects.filter(
-
-    )
 
     context = {
         'post': post,
