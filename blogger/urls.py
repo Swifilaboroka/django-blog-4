@@ -5,7 +5,7 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('decoder/', admin.site.urls),
     path('tinymce/', include('tinymce.urls')),
     path('', include('core.urls')),
     path('hitcount/', include(('hitcount.urls', 'hitcount'), namespace='hitcount')),

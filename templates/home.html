@@ -8,18 +8,7 @@
     <!-- 	Card -->
     {% if posts %}
       {% for post in posts %}
-        <div
-          class="
-            w-full
-            md:h-48
-            flex flex-col
-            md:flex-row
-            bg-gray-100
-            rounded-md
-            overflow-hidden
-            shadow-md
-          "
-        >
+        <div class="w-full md:h-48 flex flex-col md:flex-row bg-gray-100 rounded-md overflow-hidden shadow-md">
           <a href="{{ post.get_absolute_url }}">
             <div class="flex-shrink-0 w-full h-auto md:w-80 md:h-full">
               <img

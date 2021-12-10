@@ -1,21 +1,25 @@
 from pathlib import Path
+import dj_database_url
 
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "4db3ptp4scikgmss6vp52yzku!-^!(i&%wh2kmfc^dk64=bp0t"
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
+
+ENVIRONMENT = os.environ.get('ENVIRONMENT', default='development')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -31,6 +35,7 @@ INSTALLED_APPS = [
     # 3rd pary
     'tinymce',
     'hitcount',
+    'whitenoise.runserver_nostatic',
 
     # local
     'users.apps.UsersConfig',
@@ -41,6 +46,7 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -142,3 +148,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
     "alignright alignjustify | bullist numlist outdent indent | "
     "removeformat | help",
 }
+
+
+# production
+if ENVIRONMENT == 'production':
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 3600 # new
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True # new
+    SECURE_HSTS_PRELOAD = True # new
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SESSION_COOKIE_SECURE = True # new
+    CSRF_COOKIE_SECURE = True
+
+
+# HEROKU
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
