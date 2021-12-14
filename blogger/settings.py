@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import django_on_heroku
+import dj_database_url
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -34,6 +35,7 @@ INSTALLED_APPS = [
 
     # 3rd pary
     'tinymce',
+    'whitenoise.runserver_nostatic',
 
     # local
     'users.apps.UsersConfig',
@@ -165,5 +167,5 @@ if ENVIRONMENT == 'production':
 # HEROKU
 django_on_heroku.settings(locals())
 
-# db_from_env = dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(db_from_env)
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
