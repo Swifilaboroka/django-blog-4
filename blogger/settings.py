@@ -20,7 +20,7 @@ ENVIRONMENT = os.environ.get('ENVIRONMENT', default='development')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', default=0))
 
-ALLOWED_HOSTS = ["ismatullayev-blog.herokuapp.com"]
+ALLOWED_HOSTS = ["ismatullayev-blog.herokuapp.com", 'localhost', '127.0.0.1']
 
 
 # Application definition
