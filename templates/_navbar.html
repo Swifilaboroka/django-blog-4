@@ -74,7 +74,7 @@
         "
       >
         {% for cat in categories %}
-          <a href="{% url 'by_category' cat.slug %}" class="hover:text-white transition duration-200">{{ cat }}</a>
+          <a href="{% url 'by_category' cat.slug %}" class="hover:text-white transition duration-200">{{ cat | capfirst}}</a>
         {% endfor %}
       </div>
 
