@@ -5,8 +5,6 @@ __pycache__
 db.sqlite3
 media
 
-staticfiles
-
 # Backup files # 
 *.bak 
 
@@ -99,9 +97,9 @@ celerybeat-schedule.*
 
 # Environments 
 .env 
-.venv 
-env/ 
+.venv
 venv/ 
+env/ 
 ENV/ 
 env.bak/ 
 venv.bak/ 
@@ -137,4 +135,4 @@ GitHub.sublime-settings
 !.vscode/extensions.json 
 .history
 
-staticfiles
+staticfiles/
