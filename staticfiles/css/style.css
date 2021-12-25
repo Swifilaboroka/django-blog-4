@@ -1,9 +1,0 @@
-@media (max-width: 768px) {
-    #toggleable_navbar {
-        margin-right: -100%;
-    }
-
-    #toggleable_navbar.active {
-        margin-right: 0;
-        z-index: 20;
-    }
